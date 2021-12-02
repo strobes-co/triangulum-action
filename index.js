@@ -7,10 +7,8 @@ const tc = require('@actions/tool-cache');
 async function run() {
   try {
     // inputs defined in action metadata file(action.yml)
-    const rules = core.getInput('rules');
     const fileUrl = core.getInput('download_url');
     const sendToStrobes = core.getInput('send_to_strobes')
-    console.log(`Rules: ${rules}`);
     console.log(`Triangulum CLI download URL: ${fileUrl}`)
 
     // If checkout of code is not done scan can't be performed
@@ -29,7 +27,7 @@ async function run() {
 
     // Add optional send to strobes flag, if enabled will send found
     // vulnerabilities to strobes
-    var args = ['--cli', '--cfg', configPath, '--rules', rules]
+    var args = ['--cli', '--cfg', configPath]
     if (sendToStrobes === 'true' || 'True' || 'T' || 't') {
       args.push('--sendtostrobes')
     }
